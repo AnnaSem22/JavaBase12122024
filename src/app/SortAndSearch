@@ -1,1 +1,78 @@
+import java.util.Scanner;
 
+public class SortAndSearch {
+    /*
+    1 Створіть масив цілих чисел з 15 елементами.
+    2 Заповніть масив випадковими цілими числами в діапазоні від 1 до 100.
+    3 Виведіть початковий вигляд масиву.
+    4 Відсортуйте масив за допомогою алгоритму сортування вставкою (Insertion Sort) в порядку зростання.
+    5 Виведіть відсортований масив.
+    6 Попросіть користувача ввести число для пошуку в масиві.
+    7 Використовуючи алгоритм бінарного пошуку, знайдіть і виведіть індекс введеного користувачем числа у відсортованому масиві або повідомте, якщо числа немає.
+    */
+    public static void main(String[] args) {
+        int income = 0;
+        int i = 0;
+        int in = 0;
+        int result = 1;
+
+        //перший масив
+        int[] numbers = new int[15];
+        for (i = 0; i < numbers.length; i++) {
+            numbers[i] = (int) (Math.random() * 100);
+        }
+        System.out.println("----------------------");
+        System.out.println("An array of integers with 15 elements: ");
+        for (int nums : numbers) {
+            System.out.print(nums + " ");
+        }
+        //другий масив
+        int m = numbers.length;
+        for (in = 1; in < m; in++) {
+            int key = numbers[in];
+            int j = in - 1;
+            while (j >= 0 && numbers[j] > key) {
+                numbers[j + 1] = numbers[j];
+                j--;
+            }
+            numbers[j + 1] = key;
+        }
+        System.out.println("\n----------------------");
+        System.out.println("Sorted array of integers with 15 elements:: ");
+        for (int sortnums : numbers) {
+            System.out.print(sortnums + " ");
+        }
+
+        //сканер
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\n----------------------");
+        System.out.print("Введіть число для пошуку в масиві: ");
+        income = sc.nextInt();
+
+        //індекс
+        int left = 0;
+        int right = numbers.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (numbers[mid] == income) {
+                left = mid + 1;
+                result = mid + 1;
+
+            } else if (numbers[mid] < income) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+            /*if (numbers[mid] != income) {
+                result = 0;
+                break;
+                //System.out.print("Число відсутне." + income);
+            }
+            //System.out.print("Число відсутне." + income);*/
+        }
+        System.out.println("\n----------------------");
+        System.out.print("Індекс: " + result);
+    }
+}
