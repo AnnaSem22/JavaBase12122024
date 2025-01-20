@@ -1,1 +1,140 @@
+import java.util.Random;                    // імпортуємо клас Random
 
+public class ArrayMulti {
+    /*
+    1 Створіть двовимірний масив цілих чисел розмірністю 4x4.
+    2 Заповніть матрицю випадковими цілими числами в діапазоні від 1 до 50.
+    3 Виведіть матрицю на екран у вигляді таблиці.
+    4 Знайдіть суму всіх елементів в парних рядках (рядок 0, 2) та суму всіх елементів в непарних рядках (рядок 1, 3).
+    5 Знайдіть добуток всіх елементів в парних стовпцях (стовпцях 0, 2) та добуток всіх елементів в непарних стовпцях (стовпцях 1, 3).
+    6 Виведіть результати сум та добутків для парних і непарних рядків та стовпців.
+    Перевірте, чи матриця є магічним квадратом. Магічний квадрат - це квадратна матриця, в якій суми всіх рядків, стовпців та діагоналей рівні між собою.
+    */
+    public static void main(String[] args) {
+
+        int m = 4, n = 4;                 //оголошуємо і ініцілізуємо змінні з розмірами масиву
+        int Array[][] = new int[m][n];    //оголошуємо і ініціалізуємо масив
+        Random generator = new Random();   // створюємо генератор випадкович чисел
+        int gn;                            //змінна в яку буде записуватися згенероване генератором число
+
+        /*заповнюємо масив випадковими числами*/
+        for (int i = 0; i < m; i++)             //проходимось по стовпцях
+            for (int j = 0; j < n; j++) {        //проходимось по рядках
+                gn = generator.nextInt(50);  //генерація випадкового числа від 0 до 100;
+                Array[i][j] = gn;             //записуємо згенероване випадкове число
+            }
+
+        /*Виводимо результат*/
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++)         // зверніть увагу на відсутність фігурної дужки
+                System.out.print(Array[i][j] + "    ");//даний рядок відноситься до масиву по j
+            System.out.println();          //виводимо символи переводу каретки і нового рядка
+            //після кожного проходження стовпцевих елементів рядка
+        }
+        //сумa всіх елементів в парних рядках (рядок 0, 2)
+        int sum = 0;
+        int sumr = 0;
+        int sumn = 0;
+        int i;
+        int j;
+
+        // збережіть суму в змінній sum
+        for (i = 0, j = 0; j < Array.length; j++) {
+            sumr += Array[i][j];
+        }
+        for (i = 2, j = 0; j < Array.length; j++) {
+            sumn += Array[i][j];
+        }
+        sum = sumr + sumn;
+        //System.out.println("індекс: " + i + "індекс: " + j);
+        System.out.println("Сума всіх елементів в парних рядках (рядок 0, 2): " + sum);
+
+        //сумa всіх елементів в непарних рядках (рядок 1, 3).
+        int nsum = 0;
+        int nsumr = 0;
+        int nsumn = 0;
+
+        // збережіть суму в змінній sum
+        for (i = 1, j = 0; j < Array.length; j++) {
+            nsumr += Array[i][j];
+        }
+        for (i = 3, j = 0; j < Array.length; j++) {
+            nsumn += Array[i][j];
+        }
+        nsum = nsumr + nsumn;
+        System.out.println("Сума всіх елементів в непарних рядках (рядок 1, 3): " + nsum);
+
+        //Добуток всіх елементів в парних рядках (рядок 0, 2)
+        int product = 0;
+        int productr = 0;
+        int productn = 0;
+
+        // збережіть Добуток в змінній nproduct
+        for (i = 0, j = 0; j < Array.length; j++) {
+            //productr *= Array[i][j];
+            productr = Array[i][j] * Array[i][j];
+        }
+        for (i = 2, j = 0; j < Array.length; j++) {
+            productn = Array[i][j] * Array[i][j];
+        }
+        product = productr + productn;
+        System.out.println("Добуток всіх елементів в парних рядках (рядок 0, 2): " + product);
+
+        //Добуток всіх елементів в непарних рядках (рядок 1, 3).
+        int nproduct = 0;
+        int nproductr = 0;
+        int nproductn = 0;
+
+        // збережіть Добуток в змінній nproduct
+        for (i = 1, j = 0; j < Array.length; j++) {
+            nproductr = Array[i][j] * Array[i][j];
+        }
+        for (i = 3, j = 0; j < Array.length; j++) {
+            nproductn = Array[i][j] * Array[i][j];
+        }
+        nproduct = nproductr + nproductn;
+        System.out.println("Добуток всіх елементів в непарних рядках (рядок 1, 3): " + nproduct);
+
+        //Матриця є магічним квадратом?.
+        //System.out.println("Матриця не є магічним квадратом.");
+        //System.out.println("Матриця є магічним квадратом.");
+       // сумма элементов по рядках
+            int sumLine = sum + nsum;
+        System.out.println("Сума всіх елементів в рядках): " + sumLine);
+
+        // сумма элементов по столбцам
+        int sumColumn = 0;
+        for (i = 0; i < Array.length; i++) {
+            for (j = 0; j < Array.length; j++) {
+                sumColumn += Array[i][j];
+               // System.out.println("індекс: " + i + "індекс: " + j);
+            }
+            //sumColumn += Array[i][j];
+            //System.out.println("індекс: " + i + "індекс: " + j);
+        }
+        //System.out.println("індекс: " + i + "індекс: " + j);
+        System.out.println("Сума всіх елементів в стопчиках: " + sumColumn);
+
+        // сума елементів по діоганалі:
+        int sumDiagonal = 0;
+        for (i = 0, j = 0; j < Array.length; i++, j++) {
+            sumDiagonal += Array[i][j];
+            System.out.println("індекс: " + i + "індекс: " + j);
+        }
+            System.out.println("Сума всіх елементів по діоганалі: " + sumDiagonal);
+
+        // сума елементів по діоганалі:
+        /*int sumDiagonaln = 0;
+        for (i = 3, j = 3; i < Array.length; i--, j--) {
+            sumDiagonaln = sumDiagonaln + Array[i][j];
+            System.out.println("індекс: " + i + "індекс: " + j);
+        }
+        System.out.println("Сума всіх елементів по діоганалі: " + sumDiagonaln);*/
+
+    if(sumLine == sumColumn){
+        System.out.println("Матриця є магічним квадратом.");}
+    else{
+        System.out.println("Матриця не є магічним квадратом.");
+        }
+    }
+}
